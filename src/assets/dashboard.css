@@ -51,16 +51,16 @@ justify-content: center;
  #titleCardAdmin{
      text-align: center;
      padding-top: 20px;
-     font-size: 18px;
+     font-size: 19px;
      font-weight: bold;
-     color: #ffa726;
+     color: #000;
  } 
  #ContentCardAdmin{
     text-align: center;
     padding-top: 20px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
-    color: #ffa726;
+    color: #000;
  }
 
 .cardDashContiner2{
@@ -128,10 +128,9 @@ width: 100%;
     margin-right: 50px
 }
 #AddCateContiner{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
- 
+
+    width: 100%;
+    direction: rtl;
 
 }
 #AddCatetitle{
@@ -140,11 +139,8 @@ width: 100%;
     justify-content: flex-end;
 }
 #AddCateInput{
-    display: flex;
-    text-align: right;
-    justify-content: flex-end;
-    margin-right: 2%;
-    width: 98%;
+    direction: rtl;
+    
 }
 #selectCategoryContiner{
     display: flex;
@@ -210,11 +206,20 @@ width: 100%;
     text-align: right;
     margin-bottom: 20px;
 }
-#Piker{
-    width: 100%;
+#sectionAddsection{
     display: flex;
+    flex-direction: column;
+    direction: rtl;
 
-    justify-content: flex-end;
+}
+#Piker{
+    margin-top: 40px;
+    padding-right: 20px;
+    width: 40px;
+    /* display: block; */
+    direction: rtl;
+    border-radius: 25%;
+    /* justify-content: flex-end; */
 }
 #printFOnt{
     font-size: 20px;

@@ -6,9 +6,9 @@ import Category from '@material-ui/icons/Category';
 import Assignment from '@material-ui/icons/Assignment';
 import Ballot from '@material-ui/icons/Ballot';
 import AssignmentTurnedIn from '@material-ui/icons/AssignmentTurnedIn';
-// import { CirclePicker } from 'react-color';
+import { CirclePicker } from 'react-color';
 import { Row, Col, Button, Form } from 'react-bootstrap';
-import { Pane, Dialog, toaster, TextInput } from 'evergreen-ui';
+import { Pane, Dialog, TextInput } from 'evergreen-ui';
 import axios from 'axios';
 import Cookies from "universal-cookie";
 import host from '../host';
@@ -36,7 +36,7 @@ class Admin extends React.Component {
         var headers = { "Content-Type": "application/json", token: cookies.get("token") };
 
         formData.append("name", this.state.cateName);
-
+        formData.append("color", this.state.Color);
 
         axios({ url: host + "api/v1/sections/add", method: "POST", data: formData, headers: headers })
             .then(response => {
@@ -222,7 +222,7 @@ class Admin extends React.Component {
                                     </div>
                                 </Col>
                             </Row>
-                            <Row>
+                            <Row style={{ marginTop: 100 }}>
                                 <Col id='rowDash' xs={12} md={6} xl={3}>
                                     <Component initialState={{ isShown: false }}>
                                         {({ state, setState }) => (
@@ -234,8 +234,8 @@ class Admin extends React.Component {
                                                     confirmLabel="التالي"
                                                     cancelLabel="الغاء"
                                                     onConfirm={() => {
-                                                   
-                                                        window.location.href = "/Table4/"+this.state.cateSelect
+
+                                                        window.location.href = `/Table4?category=${this.state.cateSelect}`
                                                         setState({ isShown: false })
                                                     }}
                                                 >
@@ -260,6 +260,8 @@ class Admin extends React.Component {
                                                 </Dialog>
 
                                                 <Button id='colorbtn' variant="warning"
+                                                    height={50}
+                                                    style={{ fontSize: 20, fontWeight: 600,width:150 }}
                                                     onClick={() => setState({ isShown: true })}>ترتيب الاصناف</Button>
                                             </Pane>
                                         )}
@@ -281,21 +283,25 @@ class Admin extends React.Component {
                                                     }}
                                                 >
                                                     <TextInput id='AddRootNameInput'
+                                                    autocomplete="off"
                                                         name="text-input-name"
                                                         placeholder="...اسم الفرع"
                                                         onChange={(e) => this.setState({ RootName: e.target.value })}
                                                     />
                                                     <TextInput id='AddRootNameInput'
+                                                    autocomplete="off"
                                                         name="text-input-name"
                                                         placeholder="...البريد الالكتروني"
                                                         onChange={(e) => this.setState({ Email: e.target.value })}
                                                     />
                                                     <TextInput id='AddRootNameInput'
+                                                    autocomplete="off"
                                                         name="text-input-name"
                                                         placeholder="...كلمة المرور"
                                                         onChange={(e) => this.setState({ PSW: e.target.value })}
                                                     />
                                                     <TextInput id='AddRootNameInput'
+                                                    autocomplete="off"
                                                         name="text-input-name"
                                                         placeholder="...رقم الهاتف"
                                                         onChange={(e) => this.setState({ Phone: e.target.value })}
@@ -309,6 +315,8 @@ class Admin extends React.Component {
                                                 </Dialog>
 
                                                 <Button id='colorbtn' variant="warning"
+                                                    height={50}
+                                                    style={{ fontSize: 20, fontWeight: 600 ,width:150}}
                                                     onClick={() => setState({ isShown: true })}>اضافة فرع</Button>
                                             </Pane>
                                         )}
@@ -350,8 +358,11 @@ class Admin extends React.Component {
                                                     </Form.Group>
                                                     <div id='AddCateContiner'>
 
-                                                        <TextInput id='AddCateInput'
-                                                            name="text-input-name"
+                                                        <TextInput width={'98%'}
+                                                        style={{fontSize:18}}
+                                                         id='AddCateInput'
+                                                         autocomplete="off"
+                                                            // name="text-input-name"
                                                             placeholder="...اسم الصنف"
                                                             onChange={(e) => this.setState({ ItemName: e.target.value })}
                                                         />
@@ -360,14 +371,14 @@ class Admin extends React.Component {
                                                         <Form.Group as={Row} id="RadioContiner">
 
                                                             <label id='CheckContiner'>قطع
-                                                <Form.Check
+                                                                <Form.Check
                                                                     type="radio" label=""
                                                                     onChange={(e) => { type = 'قطع'; }}
                                                                     custom name="formHorizontalRadios" id="step1"
                                                                 />
                                                             </label>
                                                             <label id='CheckContiner1'>كغ
-                                                <Form.Check
+                                                                <Form.Check
                                                                     type="radio" label=""
                                                                     onChange={(e) => { type = 'كغ'; }}
                                                                     custom name="formHorizontalRadios" id="step2"
@@ -379,6 +390,8 @@ class Admin extends React.Component {
                                                 </Dialog>
 
                                                 <Button id='colorbtn' variant="warning"
+                                                    height={50}
+                                                    style={{ fontSize: 20, fontWeight: 600,width:150 }}
                                                     onClick={() => setState({ isShown: true })}>اضافة صنف</Button>
                                             </Pane>
                                         )}
@@ -400,16 +413,24 @@ class Admin extends React.Component {
                                                     }}
                                                 >
                                                     <div id='AddCateContiner'>
-                                                        <span id='AddCatetitle' >اسم القسم</span>
-                                                        <TextInput id='AddCateInput'
-                                                            name="text-input-name"
-                                                            placeholder="...اسم القسم"
+                                                        <TextInput width={'100%'}
+                                                        style={{fontSize:18}}
+                                                        autocomplete="off"
+                                                            placeholder="اسم القسم..."
                                                             onChange={(e) => this.setState({ cateName: e.target.value })}
-                                                        />
+                                                         />
+                                                        <div id='Piker'>
+                                                            <CirclePicker
+                                                                onChangeComplete={this.handleChangeComplete}
+                                                            />
+                                                        </div>
                                                     </div>
+
                                                 </Dialog>
 
                                                 <Button id='colorbtn' variant="warning"
+                                                    height={50}
+                                                    style={{ fontSize: 20, fontWeight: 600 ,width:150}}
                                                     onClick={() => setState({ isShown: true })}>اضافة قسم</Button>
                                             </Pane>
                                         )}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Context from '../Context';
-import { DH_CHECK_P_NOT_PRIME } from 'constants';
+
 
 class CustomizedTable extends React.Component {
    constructor(props) {
@@ -9,40 +9,17 @@ class CustomizedTable extends React.Component {
 
       }
    }
-
-
-
-   // renderTableData(done) {
-   //    return 
-
-   //       return (
-
-   //          <React.Fragment>
-   //             {dnone.items.map((item, ii) => (
-   //                <tr>
-   //                   <td >{ii}</td>
-   //                   <td style={{ width: 250 }}>{item.name}</td>
-   //                   <td >{item.name}</td>
-   //                </tr>
-   //             ))}
-
-   //          </React.Fragment>
-
-
-   //       )
-   //    })
-   // }
    render() {
 
       return (
          <Context.Consumer>
             {ctx => {
                return (
-                  <div>
+                  <div id='tablePrintMargin'>
 
 
                      {this.props.item.map((dnone, i) => (
-                        <div>
+                        <div key={i} id='tablePrintMargin' >
                            <div id='RootNAmeprint'>
                            <div> {this.props.date}</div>
                               <div> {this.props.order}</div>
@@ -54,11 +31,11 @@ class CustomizedTable extends React.Component {
                               <th>الصنف</th>
                               <th>العدد/الوزن</th>
                            </tr>
-                           <tbody>
+                           <tbody >
                               {dnone.items.map((item, ii) => (
-                                 <tr>
-                                    <td >{ii + 1}</td>
-                                    <td style={{ width: 200 }}>{item.name}</td>
+                                 <tr key={ii}>
+                                    <td style={{ width: 60 }} >{ii + 1}</td>
+                                    <td  >{item.name}</td>
                                     <td style={{ width: 100 }} >{item.count + ' ' +item.type}</td>
                                  </tr>
 
@@ -66,7 +43,6 @@ class CustomizedTable extends React.Component {
                            </tbody>
                            
                         </table>
-                        <div id='notsAllOrder'>الملاحضات:{dnone.note}</div>
                         </div>
                      ))}
 

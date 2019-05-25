@@ -5,7 +5,6 @@ import Prints from '@material-ui/icons/Print';
 import CustomizedTable from '../sidebar/print';
 import { PrintProvider, NoPrint, Print } from 'react-easy-print';
 import Context from '../Context';
-import ReactToPrint from 'react-to-print';
 import axios from 'axios';
 import Cookies from "universal-cookie";
 import host from '../host';
@@ -15,7 +14,8 @@ class Table1 extends React.Component {
 constructor(){
   super();
   this.state={
-    data:[]
+    data:[],
+    note:''
   }
 }
 
@@ -74,9 +74,8 @@ constructor(){
 
                                   <NoPrint>
                                     <Print single name="foo">
-                                     
                                         <CustomizedTable item={this.state.data} order={order.user.name} date={order.uptime}/>
-                                
+                                        <div id='notsAllOrder'>الملاحضات:{ this.state.note }</div>
                                     </Print>
                                   </NoPrint>
                                 </PrintProvider>
@@ -88,12 +87,15 @@ constructor(){
  
                                   axios.get(host + `api/v1/Store/order/`+order._id, { headers: { "Content-Type": "application/json", token: cookies.get("token")} })
                                   .then(response => {
-                                    this.setState({ data:response.data.order[0].sections })
-                                    console.log(response.data.order[0].sections);
+                                    this.setState({ 
+                                      data:response.data.order[0].sections ,
+                                      note:response.data.order[0].sections[0].note
+                                    })
+                                    console.log();
                                     
                                   })
                                   .catch((error) => { console.log('error ' + error) })
-                                  console.log(order._id)
+                                  // console.log(order._id)
                                  
                                   setState({ isShown: true })
                                 }} style={{ color: '#ffc107', cursor: 'pointer' }} />

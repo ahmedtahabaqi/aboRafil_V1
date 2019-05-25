@@ -28,7 +28,7 @@ class Login extends React.Component {
                     path: "/",
                     expires: new Date(Date.now() + 604800000)
                 });
-                window.location.href = "/admin";
+                window.location.href = "/";
             })
             .catch(function (error) {
                 if (error.response) {
@@ -51,6 +51,7 @@ class Login extends React.Component {
                             <div id='SINgnINTItle'>تسجيل الدخول</div>
                             <form id='FOrmS'>
                                 <TextInput id='NAMlogIN' 
+                                autocomplete="off"
                                     name="text-input-name"
                                     placeholder="اسم المستخدم"
                                     onChange={(event) => this.setState({ email: event.target.value })}

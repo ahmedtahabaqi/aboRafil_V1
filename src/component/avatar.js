@@ -4,7 +4,6 @@ import { Popover, Menu, Position, Button, Avatar } from 'evergreen-ui';
 import Cookies from "universal-cookie";
 import Context from './Context';
 // import axios from 'axios';
-import Person from '@material-ui/icons/Person';
 // import host from '../Host';
 const cookies = new Cookies();
 
@@ -30,7 +29,7 @@ class Avatir extends React.Component {
                                     <Menu>
                                         <Menu.Group>
                                             <Menu.Item>
-                                                <p style={{ textAlign: 'center' }}>ahmed@ahmed</p>
+                                                <p style={{ textAlign: 'center' }}>{ctx.value.session.email}</p>
 
                                             </Menu.Item>
                                         </Menu.Group>
@@ -50,7 +49,7 @@ class Avatir extends React.Component {
                                 } >
                                 <Avatar id='editAvatar'
                                     src={require('../assets/man.png')}
-                                    name="Jeroen Ransijn"
+                                    name={ctx.value.session.name}
                                     size={50}
                                     style={{ cursor: 'pointer' }}
                                 />

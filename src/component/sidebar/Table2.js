@@ -17,7 +17,8 @@ class Table2 extends React.Component {
   constructor(){
     super();
     this.state={
-      data:[]
+      data:[],
+      note:''
     }
   }
   render() {
@@ -51,7 +52,7 @@ class Table2 extends React.Component {
                 </Table.Head>
                 <Table.Body minHeight={340}>
                   {ctx.value.ordersDone.map((orderDone, i) => (
-                    <Table.Row key={orderDone._id} isSelectable>
+                    <Table.Row key={orderDone._id} >
                       <Table.TextCell flexBasis={80} flexShrink={0} flexGrow={0}><Done /></Table.TextCell>
                       <Table.TextCell flexBasis={80} flexShrink={0} flexGrow={0}>
 
@@ -79,6 +80,7 @@ class Table2 extends React.Component {
                                   <NoPrint>
                                     <Print single name="foo">
                                         <CustomizedTable item={this.state.data} order={orderDone.user.name} date={orderDone.uptime} />
+                                        <div id='notsAllOrder'>الملاحضات:{ this.state.note }</div>
                                     </Print>
                                   </NoPrint>
                                 </PrintProvider>
@@ -90,16 +92,18 @@ class Table2 extends React.Component {
  
                                   axios.get(host + `api/v1/Store/order/`+orderDone._id, { headers: { "Content-Type": "application/json", token: cookies.get("token")} })
                                   .then(response => {
-                                    this.setState({ data:response.data.order[0].sections })
-                                    console.log(response.data.order[0].sections);
+                                    this.setState({ 
+                                      data:response.data.order[0].sections ,
+                                      note:response.data.order[0].sections[0].note
+                                    })
+                                    console.log();
                                     
                                   })
                                   .catch((error) => { console.log('error ' + error) })
-                                  console.log(orderDone._id)
+                                  // console.log(order._id)
                                  
                                   setState({ isShown: true })
                                 }} style={{ color: '#ffc107', cursor: 'pointer' }} />
-
                             </Pane>
                           )}
                         </Component>

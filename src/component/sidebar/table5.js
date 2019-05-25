@@ -1,6 +1,6 @@
 import React from 'react';
 import Component from "@reactions/component";
-import { Table, Pane, Dialog, TextInput, Paragraph, SideSheet } from 'evergreen-ui';
+import { Table, Paragraph, SideSheet } from 'evergreen-ui';
 import Input from '@material-ui/icons/Input';
 import Context from '../Context';
 import axios from 'axios';
@@ -64,7 +64,7 @@ class Table5 extends React.Component {
                 </Table.Head>
                 <Table.Body minHeight={340}>
                   {ctx.value.Root.map((root, i) => (
-                    <Table.Row isSelectable key={root._id}>
+                    <Table.Row key={root._id}>
                       <Component initialState={{ isShown: false }}>
                         {({ state, setState }) => (
                           <React.Fragment>
